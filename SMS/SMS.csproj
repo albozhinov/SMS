@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BasicWebServer.Server\BasicWebServer.Server.csproj" />
-    <ProjectReference Include="..\SMS.Data\SMS.Data.csproj" />
     <ProjectReference Include="..\SMS.Services\SMS.Services.csproj" />
   </ItemGroup>
 
