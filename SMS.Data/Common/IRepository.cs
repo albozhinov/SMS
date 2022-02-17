@@ -1,14 +1,14 @@
 ﻿namespace SMS.Data.Common
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository
     {
-        IQueryable<T> All();
+        IQueryable<T> All<T>() where T : class;
 
-        void Add(T entity);
+        void Add<T>(T entity) where T : class;
 
-        Task AddAsync(T entity);
+        Task AddAsync<T>(T entity) where T : class;
 
-        void Update(T entity);
+        void Update<T>(T entity) where T : class;
 
         void Save();
 

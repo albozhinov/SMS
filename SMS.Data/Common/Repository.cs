@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace SMS.Data.Common
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository : IRepository
     {
         private readonly SMSDbContext dbContext;
 
@@ -12,7 +12,7 @@ namespace SMS.Data.Common
             dbContext = _dbContext;
         }
 
-        public void Add(T entity)
+        public void Add<T>(T entity) where T : class
         {
             EntityEntry entry = dbContext.Entry(entity);
 
@@ -26,7 +26,7 @@ namespace SMS.Data.Common
             }
         }
 
-        public async Task AddAsync(T entity)
+        public async Task AddAsync<T>(T entity) where T : class
         {
             EntityEntry entry = dbContext.Entry(entity);
 
@@ -40,7 +40,7 @@ namespace SMS.Data.Common
             }
         }
 
-        public IQueryable<T> All()
+        public IQueryable<T> All<T>() where T : class
         {
             return dbContext.Set<T>().AsQueryable();
         }
@@ -55,7 +55,7 @@ namespace SMS.Data.Common
             await dbContext.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public void Update<T>(T entity) where T : class
         {
             EntityEntry entry = dbContext.Entry(entity);
 
