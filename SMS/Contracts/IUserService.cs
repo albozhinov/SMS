@@ -8,6 +8,6 @@ using SMS.ViewModels;
 
         string Login(LoginViewModel model);
 
-        string GetUsername(string userId);
+        UserViewModel GetUsername(string userId);
     }
 }
