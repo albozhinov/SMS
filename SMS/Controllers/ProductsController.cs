@@ -37,5 +37,34 @@
 
             return Redirect("/");
         }
+
+        [Authorize]
+        [HttpGet]
+        public Response Add(string productId, string cartId)
+        {
+            var product = productService.GetProducts(productId);
+
+            var model = new 
+            { 
+                IsAuthenticated = true, 
+                ProductName = product.ProductName, 
+                ProductPrice = product.ProductPrice,
+                CartId = cartId,
+                ProductId = productId
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public Response AddProduct(string productId, string cartId)
+        {
+            
+            (bool isAdded, string message) addedProduct = productService.AddProductToCart(productId, cartId);         
+
+
+            return Redirect("/Carts/Details");
+        }
     }
 }

@@ -23,11 +23,12 @@ namespace SMS.Controllers
         {
             if (User.IsAuthenticated)
             {
-                string username = userService.GetUsername(User.Id);
+                var username = userService.GetUsername(User.Id);
 
                 var model = new
                 {
-                    Username = username,
+                    Username = username.Username,
+                    CartId = username.CartId,
                     IsAuthenticated = true,
                     Products = productService.GetProducts()
                 };
