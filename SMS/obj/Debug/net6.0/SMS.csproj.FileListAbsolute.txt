@@ -4,7 +4,6 @@ C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Error.cshtm
 C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Home\Index.cshtml
 C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Home\IndexLoggedIn.cshtml
 C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Layout.cshtml
-C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Products\Add.cshtml
 C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Products\Create.cshtml
 C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Users\Login.cshtml
 C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Users\Register.cshtml
@@ -76,3 +75,4 @@ C:\Users\Precision M4800\source\repos\SMS\SMS\obj\Debug\net6.0\SMS.dll
 C:\Users\Precision M4800\source\repos\SMS\SMS\obj\Debug\net6.0\ref\SMS.dll
 C:\Users\Precision M4800\source\repos\SMS\SMS\obj\Debug\net6.0\SMS.pdb
 C:\Users\Precision M4800\source\repos\SMS\SMS\obj\Debug\net6.0\SMS.genruntimeconfig.cache
+C:\Users\Precision M4800\source\repos\SMS\SMS\bin\Debug\net6.0\Views\Products\Add.cshtml
