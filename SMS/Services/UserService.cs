@@ -24,10 +24,17 @@
             validationService = _validationService;
         }
 
-        public string GetUsername(string userId)
+        public UserViewModel GetUsername(string userId)
         {
             return repo.All<User>()
-                .FirstOrDefault(u => u.Id == userId)?.Username;
+                .Where(u => u.Id == userId)
+                .Select(u => new UserViewModel
+                {
+                   UserId = u.Id,
+                   Username = u.Username,
+                   CartId = u.CartId
+                })
+                .FirstOrDefault();
         }
 
         public string Login(LoginViewModel model)

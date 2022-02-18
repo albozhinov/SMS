@@ -21,6 +21,39 @@
             repo = _repo;
             validationService = _validationService;
         }
+
+        public (bool added, string message) AddProductToCart(string productId, string cartId)
+        {
+            bool isAdded = true;
+            string message = null;
+
+            var product = repo.All<Product>()
+                                    .FirstOrDefault(p => p.Id == productId);
+            if (product == null)
+            {
+                isAdded = false;
+                message = "This product is not exist.";
+
+                return (isAdded, message);
+            }
+
+            var cart = repo.All<Cart>()
+                            .FirstOrDefault(c => c.Id == cartId);
+
+            if (cart == null)
+            {
+                isAdded = false;
+                message = "This cart is not exist.";
+
+                return (isAdded, message);
+            }
+
+            cart.Products.Add(product);
+            repo.SaveChanges();
+
+            return (isAdded, message);
+        }
+
         public (bool created, string error) Create(CreateViewModel model)
         {
             bool created = false;
@@ -71,6 +104,18 @@
                     ProductId = p.Id
                 })
                 .ToList();
+        }
+        public ProductListViewModel GetProducts(string id)
+        {
+            return repo.All<Product>()
+                .Where(p => p.Id == id)
+                .Select(p => new ProductListViewModel()
+                {
+                    ProductName = p.Name,
+                    ProductPrice = p.Price.ToString("F2"),
+                    ProductId = p.Id
+                })
+                .FirstOrDefault();
         }
     }
 }
