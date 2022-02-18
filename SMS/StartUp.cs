@@ -2,10 +2,10 @@
 {
     using BasicWebServer.Server;
     using BasicWebServer.Server.Routing;
+    using SMS.Contracts;
     using SMS.Data;
     using SMS.Data.Common;
-    using SMS.Services.Contracts;
-    using SMS.Services.Services;
+    using SMS.Services;
     using System.Threading.Tasks;
 
     public class StartUp
@@ -17,9 +17,12 @@
                .MapStaticFiles());
 
             server.ServiceCollection
-                .Add<IUserService, UserService>()
                 .Add<SMSDbContext>()
-                .Add<IRepository, Repository>();
+                .Add<IRepository, Repository>()
+                .Add<IUserService, UserService>()
+                .Add<ICartService, CartService>()
+                .Add<IProductService, ProductService>()
+                .Add<IValidationService, ValidationService>();
 
             await server.Start();
         }

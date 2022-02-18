@@ -3,8 +3,8 @@
     using BasicWebServer.Server.Attributes;
     using BasicWebServer.Server.Controllers;
     using BasicWebServer.Server.HTTP;
-    using SMS.Services.Contracts;
-    using SMS.ViewModels.User;
+    using SMS.Contracts;
+    using SMS.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -19,8 +19,7 @@
         {
             userService = _userService;
         }
-
-        [HttpGet]
+        
         public Response Login()
         {
             if (User.IsAuthenticated)
@@ -29,6 +28,26 @@
             }
 
             return View(new { IsAuthenticated = false });
+        }
+
+        [HttpPost]
+        public Response Login(LoginViewModel model)
+        {
+            Request.Session.Clear();
+            string id = userService.Login(model);
+
+            if (id == null)
+            {
+                return View(new { ErrorMessage = "Incorect Login" }, "/Error");
+            }
+
+            SignIn(id);
+
+            CookieCollection cookies = new CookieCollection();
+            cookies.Add(Session.SessionCookieName,
+                Request.Session.Id);
+
+            return Redirect("/");
         }
 
         public Response Register()
@@ -60,13 +79,20 @@
                 return View(new { ErrorMessage = errorMessage }, "/Error");
             }
 
-            (bool registered, string errors) = userService.Register(model.Username, model.Email, model.Password);
+            (bool registered, string errors) = userService.Register(model);
 
             if (errors != null)
                 return View(new { ErrorMessage = errors }, "/Error");
 
-
             return Redirect("/Users/Login");
+        }
+
+        [Authorize]
+        public Response Logout()
+        {
+            SignOut();
+
+            return Redirect("/");
         }
     }
 }
