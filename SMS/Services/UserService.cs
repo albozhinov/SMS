@@ -45,7 +45,22 @@
             bool registered = false;
             string error = null;
 
+            var isUserExists = repo.All<User>()
+                                   .Where(u => u.Username == model.Username || 
+                                   u.Email == model.Email)
+                                   .FirstOrDefault();
+
+
+            if (isUserExists != null)
+            {
+            registered = false;
+            error = "User with this username or email already exist.";
+
+                return (registered, error);
+            }
+
             var (isValid, validationError) = validationService.ValidateModel(model);
+            (isValid, validationError) = validationService.NullOrWhiteSpacesCheck(model);
 
             if (!isValid)
             {
